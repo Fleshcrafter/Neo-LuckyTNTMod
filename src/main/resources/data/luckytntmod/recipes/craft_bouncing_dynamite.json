@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:bouncing_tnt"
+    }
+  ],
+  "result": {
+    "id": "luckytntmod:bouncing_dynamite",
+    "count": 4
+  }
+}

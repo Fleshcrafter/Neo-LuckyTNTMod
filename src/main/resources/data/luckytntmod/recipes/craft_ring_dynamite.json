@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:ring_tnt"
+    }
+  ],
+  "result": {
+    "id": "luckytntmod:ring_dynamite",
+    "count": 4
+  }
+}
