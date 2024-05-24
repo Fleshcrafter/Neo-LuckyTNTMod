@@ -1,7 +1,6 @@
 package luckytnt;
 
 import luckytnt.client.gui.ConfigScreen;
-import luckytnt.client.overlay.OverlayTick;
 import luckytnt.config.LuckyTNTConfigs;
 import luckytnt.registry.SoundRegistry;
 import luckytntlib.registry.RegistryHelper;
@@ -16,7 +15,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -39,7 +37,6 @@ public class LuckyTNTMod {
 	};
 
 	public LuckyTNTMod(IEventBus modEventBus, ModContainer modContainer) {
-		modEventBus.addListener(this::clientSetup);
 		SoundRegistry.SOUNDS.register(modEventBus);
 		entityRegistry.register(modEventBus);
 		blockEntityRegistry.register(modEventBus);
@@ -49,9 +46,5 @@ public class LuckyTNTMod {
 		featureRegistry.register(modEventBus);
 		LuckyTNTConfigs.registerCommonConfig(modContainer);
 		modContainer.registerExtensionPoint(IConfigScreenFactory.class, configScreenFactory);
-	}
-
-	private void clientSetup(final FMLClientSetupEvent event) {
-		OverlayTick.onGameStart();
 	}
 }

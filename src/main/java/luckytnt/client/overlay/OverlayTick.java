@@ -1,28 +1,32 @@
 package luckytnt.client.overlay;
 
-import java.lang.reflect.Field;
-
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.EffectRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
 
+@EventBusSubscriber(value = {Dist.CLIENT})
 public class OverlayTick {
 	
 	private static float contaminatedAmount = 0;
 	
 	@SuppressWarnings("resource")
-	public static void onOverlayRender(GuiGraphics graphics) {
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void onOverlayRender(RenderGuiEvent.Post event) {
 		if(Minecraft.getInstance().player != null) {
+			GuiGraphics graphics = event.getGuiGraphics();
 			Player player = Minecraft.getInstance().player;
 			int w = graphics.guiWidth();
 			int h = graphics.guiHeight();
@@ -50,31 +54,6 @@ public class OverlayTick {
 			RenderSystem.disableBlend();
 			RenderSystem.enableDepthTest();
 			RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-		}
-	}
-	
-	public static void onGameStart() {
-		Minecraft minecraft = Minecraft.getInstance();
-		Gui gui = minecraft.gui;
-		LayeredDraw.Layer layer = new LayeredDraw.Layer() {
-			
-			@Override
-			public void render(GuiGraphics graphics, float partialTicks) {
-				onOverlayRender(graphics);
-			}
-		};
-		
-		try {
-			loop: for(Field field : Gui.class.getDeclaredFields()) {
-				field.setAccessible(true);
-
-				if(field.get(gui) instanceof LayeredDraw layers) {
-					layers.add(layer);
-					break loop;
-				}
-			}
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
 		}
 	}
 }
