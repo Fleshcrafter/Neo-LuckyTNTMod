@@ -4,12 +4,13 @@ import luckytnt.client.gui.ConfigScreen;
 import luckytnt.client.overlay.OverlayTick;
 import luckytnt.config.LuckyTNTConfigs;
 import luckytnt.registry.SoundRegistry;
-import luckytntlib.registry.DeferredEntityRegister;
 import luckytntlib.registry.RegistryHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.neoforged.bus.api.IEventBus;
@@ -25,11 +26,10 @@ public class LuckyTNTMod {
 	public static final DeferredRegister.Blocks blockRegistry = DeferredRegister.createBlocks(MODID);
 	public static final DeferredRegister<BlockEntityType<?>> blockEntityRegistry = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, MODID);
 	public static final DeferredRegister.Items itemRegistry = DeferredRegister.createItems(MODID);
-	public static final DeferredEntityRegister entityRegistry = DeferredEntityRegister.createEntityRegistry(MODID);
+	public static final DeferredRegister<EntityType<?>> entityRegistry = DeferredRegister.create(Registries.ENTITY_TYPE, MODID);
 	public static final DeferredRegister<MobEffect> effectRegistry = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, MODID);
 	public static final DeferredRegister<Feature<?>> featureRegistry = DeferredRegister.create(BuiltInRegistries.FEATURE, MODID);
 	public static final RegistryHelper RH = new RegistryHelper(blockRegistry, itemRegistry, entityRegistry);
-
 	private IConfigScreenFactory configScreenFactory = new IConfigScreenFactory() {
 
 		@Override

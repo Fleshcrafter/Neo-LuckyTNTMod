@@ -29,10 +29,13 @@ import net.minecraft.world.level.block.RailBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = LuckyTNTMod.MODID, bus = Bus.MOD)
 public class BlockRegistry {
 
 	//TNT
@@ -267,4 +270,7 @@ public class BlockRegistry {
 	public static final DeferredBlock<Block> OBSIDIAN_DETECTOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_detector_rail", () -> new DetectorRailBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
 	public static final DeferredBlock<Block> TOXIC_STONE = LuckyTNTMod.blockRegistry.register("toxic_stone", () -> new ToxicStoneBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).mapColor(MapColor.COLOR_GREEN).lootFrom(() -> Blocks.STONE)));
 	public static final DeferredBlock<Block> PRESENT = LuckyTNTMod.blockRegistry.register("present", () -> new PresentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.WOOL).strength(0.3f, 0f)));
+
+	@SubscribeEvent
+	public static void dummyRegisterEvent(NewRegistryEvent event) {	}
 }

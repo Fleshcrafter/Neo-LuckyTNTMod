@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytntlib.entity.LExplosiveProjectile;
-import luckytntlib.registry.DeferredEntity;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.entity.EntityType;
@@ -13,9 +12,9 @@ import net.minecraft.world.level.block.Blocks;
 
 public class DropProjectileTNTEffect extends PrimedTNTEffect {
 	
-	public final Supplier<DeferredEntity<EntityType<LExplosiveProjectile>>> projectile;
+	public final Supplier<Supplier<EntityType<LExplosiveProjectile>>> projectile;
 	
-	public DropProjectileTNTEffect(Supplier<DeferredEntity<EntityType<LExplosiveProjectile>>> projectile) {
+	public DropProjectileTNTEffect(Supplier<Supplier<EntityType<LExplosiveProjectile>>> projectile) {
 		this.projectile = projectile;
 	}
 

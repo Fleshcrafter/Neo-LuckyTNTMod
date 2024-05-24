@@ -1,9 +1,10 @@
 package luckytnt.tnteffects;
 
+import java.util.function.Supplier;
+
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.entity.PrimedLTNT;
-import luckytntlib.registry.DeferredEntity;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
@@ -22,7 +23,7 @@ public class CityFireworkEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		for(int count = 0; count < 50; count++) {
-			DeferredEntity<EntityType<PrimedLTNT>> type = null;
+			Supplier<EntityType<PrimedLTNT>> type = null;
 			int rand = (int)Math.round(Math.random() * 3);
 			switch(rand) {
 				case 0: type = EntityRegistry.COBBLESTONE_HOUSE_TNT; break;
