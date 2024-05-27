@@ -47,6 +47,6 @@ public class ClientboundIntNBTPacket implements CustomPacketPayload {
 
 	@Override
 	public Type<? extends CustomPacketPayload> type() {
-		return null;
+		return TYPE;
 	}
 }
