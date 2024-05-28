@@ -1,17 +1,16 @@
 package luckytnt;
 
-import luckytnt.client.gui.ConfigScreen;
+import luckytnt.client.ClientAccess;
 import luckytnt.config.LuckyTNTConfigs;
 import luckytnt.registry.SoundRegistry;
 import luckytntlib.registry.RegistryHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -28,15 +27,8 @@ public class LuckyTNTMod {
 	public static final DeferredRegister<MobEffect> effectRegistry = DeferredRegister.create(BuiltInRegistries.MOB_EFFECT, MODID);
 	public static final DeferredRegister<Feature<?>> featureRegistry = DeferredRegister.create(BuiltInRegistries.FEATURE, MODID);
 	public static final RegistryHelper RH = new RegistryHelper(blockRegistry, itemRegistry, entityRegistry);
-	private IConfigScreenFactory configScreenFactory = new IConfigScreenFactory() {
 
-		@Override
-		public Screen createScreen(Minecraft minecraft, Screen modListScreen) {
-			return new ConfigScreen();
-		}
-	};
-
-	public LuckyTNTMod(IEventBus modEventBus, ModContainer modContainer) {
+	public LuckyTNTMod(IEventBus modEventBus, Dist dist, ModContainer modContainer) {
 		SoundRegistry.SOUNDS.register(modEventBus);
 		entityRegistry.register(modEventBus);
 		blockEntityRegistry.register(modEventBus);
@@ -45,6 +37,9 @@ public class LuckyTNTMod {
 		effectRegistry.register(modEventBus);
 		featureRegistry.register(modEventBus);
 		LuckyTNTConfigs.registerCommonConfig(modContainer);
-		modContainer.registerExtensionPoint(IConfigScreenFactory.class, configScreenFactory);
+		
+		if(dist.isClient()) {
+			modContainer.registerExtensionPoint(IConfigScreenFactory.class, ClientAccess.getScreenFactory());
+		}
 	}
 }

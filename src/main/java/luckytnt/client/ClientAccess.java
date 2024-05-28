@@ -1,13 +1,24 @@
 package luckytnt.client;
 
 import luckytnt.LevelVariables;
+import luckytnt.client.gui.ConfigScreen;
 import luckytnt.util.NuclearBombLike;
 import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 public class ClientAccess {
+	
+	private static final IConfigScreenFactory configScreenFactory = new IConfigScreenFactory() {
+
+		@Override
+		public Screen createScreen(Minecraft minecraft, Screen modListScreen) {
+			return new ConfigScreen();
+		}
+	};
 	
 	public static void setEntityStringTag(String name, String tag, int id) {
 		Minecraft minecraft = Minecraft.getInstance();
@@ -63,5 +74,9 @@ public class ClientAccess {
 				}
 			}
 		}
+	}
+	
+	public static IConfigScreenFactory getScreenFactory() {
+		return configScreenFactory;
 	}
 }
