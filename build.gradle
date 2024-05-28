@@ -17,7 +17,7 @@ repositories {
 }
 
 base {
-    archivesName = "neo-luckytntmod"
+    archivesName = "neo-luckytntmod-1.20.6"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
