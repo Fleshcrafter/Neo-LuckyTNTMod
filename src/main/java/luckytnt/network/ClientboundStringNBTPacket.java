@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ClientboundStringNBTPacket implements CustomPacketPayload {
 	
-	public static final Type<ClientboundStringNBTPacket> TYPE = new Type<>(new ResourceLocation(LuckyTNTMod.MODID, "string_nbt_packet"));
+	public static final Type<ClientboundStringNBTPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(LuckyTNTMod.MODID, "string_nbt_packet"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundStringNBTPacket> STREAM_CODEC = CustomPacketPayload.codec(ClientboundStringNBTPacket::encode, ClientboundStringNBTPacket::new);
 	
 	public final String name;

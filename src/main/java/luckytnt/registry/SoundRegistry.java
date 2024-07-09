@@ -22,7 +22,7 @@ public class SoundRegistry {
 	public static DeferredHolder<SoundEvent, SoundEvent> VACUUM_CLEANER = register("vacuum_cleaner");
 	
 	public static DeferredHolder<SoundEvent, SoundEvent> register(String name){
-		return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(LuckyTNTMod.MODID, name)));
+		return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(LuckyTNTMod.MODID, name)));
 	}
 
 	@SubscribeEvent

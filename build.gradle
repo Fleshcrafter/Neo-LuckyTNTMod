@@ -3,7 +3,11 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.133'
+    id 'net.neoforged.gradle.userdev' version '7.0.145'
+}
+
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
 }
 
 version = mod_version
@@ -12,12 +16,12 @@ group = mod_group_id
 repositories {
     mavenLocal()
     maven {
-  		url "https://jitpack.io"
-  	}
+        url "https://jitpack.io"
+    }
 }
 
 base {
-    archivesName = "neo-luckytntmod-1.20.6"
+    archivesName = "neo-luckytntmod-"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -25,6 +29,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 runs {
     configureEach {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
+
         systemProperty 'forge.logging.console.level', 'debug'
 
         modSource project.sourceSets.main
@@ -56,7 +61,7 @@ configurations {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation "com.github.SlimingHD:Neo-LuckyTNTLib:1.20.6-20.6.62.1"
+    implementation "com.github.SlimingHD:Neo-LuckyTNTLib:1.21-21.0.78.2"
 }
 
 tasks.withType(ProcessResources).configureEach {

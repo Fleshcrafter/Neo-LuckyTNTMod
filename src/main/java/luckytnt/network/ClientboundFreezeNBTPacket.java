@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ClientboundFreezeNBTPacket implements CustomPacketPayload {
 	
-	public static final Type<ClientboundFreezeNBTPacket> TYPE = new Type<>(new ResourceLocation(LuckyTNTMod.MODID, "freeze_nbt_packet"));
+	public static final Type<ClientboundFreezeNBTPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(LuckyTNTMod.MODID, "freeze_nbt_packet"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundFreezeNBTPacket> STREAM_CODEC = CustomPacketPayload.codec(ClientboundFreezeNBTPacket::encode, ClientboundFreezeNBTPacket::new);
 	
 	public final String nbt;

@@ -39,7 +39,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.IPlantable;
+import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 @EventBusSubscriber(modid = LuckyTNTMod.MODID)
@@ -194,7 +194,9 @@ public class LevelEvents {
 									int posY = getTopBlock(sPlayer.level(), sPlayer.getX() + offX, sPlayer.getZ() + offZ, true);
 									BlockPos pos = new BlockPos(Mth.floor(sPlayer.getX() + offX), posY + 1, Mth.floor(sPlayer.getZ() + offZ));
 									BlockState state = sPlayer.level().getBlockState(pos);
-									if((Materials.isPlant(state) || state.isAir()) && sPlayer.level().getBlockState(pos.below()).canSustainPlant(level, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
+									TriState soilDecision = sPlayer.level().getBlockState(pos.below()).canSustainPlant(level, pos.below(), Direction.UP, Blocks.DEAD_BUSH.defaultBlockState());
+									boolean canPlace = !soilDecision.isDefault() ? soilDecision.isTrue() : player.level().getBlockState(pos.below()).is(BlockTags.DEAD_BUSH_MAY_PLACE_ON);
+									if((Materials.isPlant(state) || state.isAir()) && canPlace && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
 										level.setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 									}
 								}

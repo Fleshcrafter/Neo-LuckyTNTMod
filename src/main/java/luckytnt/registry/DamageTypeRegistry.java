@@ -15,8 +15,8 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class DamageTypeRegistry {
 	
-	public static ResourceKey<DamageType> SAY_GOODBYE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(LuckyTNTMod.MODID, "say_goodbye"));
-	public static ResourceKey<DamageType> HAILSTONE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(LuckyTNTMod.MODID, "hailstone"));
+	public static ResourceKey<DamageType> SAY_GOODBYE = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(LuckyTNTMod.MODID, "say_goodbye"));
+	public static ResourceKey<DamageType> HAILSTONE = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(LuckyTNTMod.MODID, "hailstone"));
 	
 	@SubscribeEvent
 	public static void registerDamageTypes(RegisterEvent event) {

@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ClientboundHydrogenBombPacket implements CustomPacketPayload {
 	
-	public static final Type<ClientboundHydrogenBombPacket> TYPE = new Type<>(new ResourceLocation(LuckyTNTMod.MODID, "hydrogen_bomb_packet"));
+	public static final Type<ClientboundHydrogenBombPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(LuckyTNTMod.MODID, "hydrogen_bomb_packet"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundHydrogenBombPacket> STREAM_CODEC = CustomPacketPayload.codec(ClientboundHydrogenBombPacket::encode, ClientboundHydrogenBombPacket::new);
 	
 	public final int entityId;

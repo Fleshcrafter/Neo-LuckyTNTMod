@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.WetSpongeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.common.IPlantable;
+import net.neoforged.neoforge.common.util.TriState;
 
 public class WastelandTNTEffect extends PrimedTNTEffect {
 	
@@ -66,7 +66,9 @@ public class WastelandTNTEffect extends PrimedTNTEffect {
 							}
 							if(dryArea) {
 								if(Materials.isPlant(state)) {
-									if(stateDown.canSustainPlant(ent.getLevel(), posDown, Direction.UP, (IPlantable)Blocks.DEAD_BUSH)) {
+									TriState soilDecision = stateDown.canSustainPlant(ent.getLevel(), posDown, Direction.UP, Blocks.DEAD_BUSH.defaultBlockState());
+									boolean canPlace = !soilDecision.isDefault() ? soilDecision.isTrue() : stateDown.is(BlockTags.DEAD_BUSH_MAY_PLACE_ON);
+									if(canPlace) {
 										ent.getLevel().setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 									}
 								}

@@ -14,7 +14,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ClientboundLevelVariablesPacket implements CustomPacketPayload {
 	
-	public static final Type<ClientboundLevelVariablesPacket> TYPE = new Type<>(new ResourceLocation(LuckyTNTMod.MODID, "level_variables_packet"));
+	public static final Type<ClientboundLevelVariablesPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(LuckyTNTMod.MODID, "level_variables_packet"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundLevelVariablesPacket> STREAM_CODEC = CustomPacketPayload.codec(ClientboundLevelVariablesPacket::encode, ClientboundLevelVariablesPacket::new);
 	
 	public final LevelVariables variables;

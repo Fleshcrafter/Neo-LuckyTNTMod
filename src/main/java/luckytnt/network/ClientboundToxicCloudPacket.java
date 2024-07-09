@@ -12,7 +12,7 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class ClientboundToxicCloudPacket implements CustomPacketPayload {
 	
-	public static final Type<ClientboundToxicCloudPacket> TYPE = new Type<>(new ResourceLocation(LuckyTNTMod.MODID, "toxic_cloud_packet"));
+	public static final Type<ClientboundToxicCloudPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(LuckyTNTMod.MODID, "toxic_cloud_packet"));
 	public static final StreamCodec<RegistryFriendlyByteBuf, ClientboundToxicCloudPacket> STREAM_CODEC = CustomPacketPayload.codec(ClientboundToxicCloudPacket::encode, ClientboundToxicCloudPacket::new);
 	
 	public final double size;
