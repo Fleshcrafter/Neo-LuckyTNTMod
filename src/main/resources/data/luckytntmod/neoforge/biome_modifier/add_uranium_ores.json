@@ -1,5 +1,5 @@
 {
-	"type": "forge:add_features",
+	"type": "neoforge:add_features",
 	"biomes": "#minecraft:is_overworld",
 	"features": "luckytntmod:uranium_ores",
 	"step": "underground_ores"
